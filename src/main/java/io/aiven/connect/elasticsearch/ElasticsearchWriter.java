@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import org.apache.kafka.common.utils.SystemTime;
+import org.apache.kafka.common.utils.Time;
 import org.apache.kafka.connect.errors.ConnectException;
 import org.apache.kafka.connect.sink.SinkRecord;
 
@@ -92,7 +92,7 @@ public class ElasticsearchWriter {
         this.behaviorOnMalformedDoc = behaviorOnMalformedDoc;
 
         bulkProcessor = new BulkProcessor<>(
-            new SystemTime(),
+            Time.SYSTEM,
             new BulkIndexingClient(client),
             maxBufferedRecords,
             maxInFlightRequests,
